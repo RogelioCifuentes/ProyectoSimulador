@@ -1,4 +1,7 @@
 package cl.forge.programatufuruto.proyectosimulador.repository;
 
-public interface BancoRepository {
+import cl.forge.programatufuruto.proyectosimulador.model.Banco;
+import org.springframework.data.repository.CrudRepository;
+
+public interface BancoRepository extends CrudRepository<Banco, String> {
 }
