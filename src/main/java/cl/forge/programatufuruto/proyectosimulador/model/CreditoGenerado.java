@@ -50,6 +50,10 @@ public class CreditoGenerado {
 
     }
 
+    public CreditoGenerado(Integer id){
+        this.idCreditoGenerado = id;
+    }
+
     public CreditoGenerado(String nombre, Integer valorCuota, Float cae, Float tasaInteresMensual, Integer gastosAsociados, Integer seguro, Integer totalIntereses, Integer montoBrutoCredito, Integer costoTotal, Banco banco, Usuario usuario) {
         this.nombre = nombre;
         this.valorCuota = valorCuota;
