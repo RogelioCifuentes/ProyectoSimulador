@@ -20,4 +20,8 @@ public class UsuarioService {
     public void guardarUsuario(Usuario usuario){
         usuarioRepository.save(usuario);
     }
+
+    public boolean usuarioPorId(Usuario usuario){
+        return usuarioRepository.findById(usuario);
+    }
 }

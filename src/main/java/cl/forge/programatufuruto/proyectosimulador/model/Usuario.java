@@ -9,8 +9,9 @@ import java.util.Date;
 public class Usuario {
 
     @Id
-    @Column(name = "idUsuario")
-    private String idUsuario;
+    @Column(name = "rut")
+    private String rut;
+
 
     @Column(name = "password")
     private String password;
@@ -25,8 +26,9 @@ public class Usuario {
     private String correo;
 
     @Column(name = "fechaRegistro")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private LocalDateTime fechaRegistro = LocalDateTime.now();
+    //@GeneratedValue(strategy = GenerationType.AUTO)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaRegistro;
 
     @ManyToOne
     @JoinColumn(name ="idRol")
@@ -37,20 +39,25 @@ public class Usuario {
 
     }
 
-    public Usuario(String idUsuario, String password, String nombre, String apellido, String correo) {
-        this.idUsuario = idUsuario;
+    public Usuario(String rut){
+        this.rut = rut;
+    }
+
+    public Usuario(String rut, String password, String nombre, String apellido, String correo, Date fechaRegistro) {
+        this.rut = rut;
         this.password = password;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
+        this.fechaRegistro = fechaRegistro;
     }
 
-    public String getIdUsuario() {
-        return idUsuario;
+    public String getRut() {
+        return rut;
     }
 
-    public void setIdUsuario(String idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setRut(String rut) {
+        this.rut = rut;
     }
 
     public String getPassword() {
@@ -85,18 +92,18 @@ public class Usuario {
         this.correo = correo;
     }
 
-    public LocalDateTime getFechaRegistro() {
+    public Date getFechaRegistro() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(LocalDateTime fechaRegistro) {
+    public void setFechaRegistro(Date fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
 
     @Override
     public String toString() {
         return "Usuario{" +
-                "idUsuario='" + idUsuario + '\'' +
+                "rut='" + rut + '\'' +
                 ", password='" + password + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
