@@ -3,6 +3,7 @@ package cl.forge.programatufuruto.proyectosimulador.controller;
 
 import cl.forge.programatufuruto.proyectosimulador.model.Usuario;
 import cl.forge.programatufuruto.proyectosimulador.services.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,7 @@ public class UsuarioController {
 
     private UsuarioService usuarioService;
 
+    @Autowired
     public UsuarioController(UsuarioService usuarioService){
         this.usuarioService = usuarioService;
     }
