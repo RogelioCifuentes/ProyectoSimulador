@@ -27,7 +27,7 @@ public class CreditoGeneradoService {
 
 
     public long numeroDeCreditosGenerados(){
-        return creditoGeneradoRepository.CountByCreditoGenerado();
+       return creditoGeneradoRepository.count();
     }
 
 

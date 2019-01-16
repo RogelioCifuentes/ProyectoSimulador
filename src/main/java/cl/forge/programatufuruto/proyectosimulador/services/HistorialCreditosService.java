@@ -25,6 +25,6 @@ public class HistorialCreditosService {
     }
 
     public long numeroDeHistorialCreditos(){
-        return historialCreditosRepository.CountByHistorialCreditos();
+        return historialCreditosRepository.count();
     }
 }
