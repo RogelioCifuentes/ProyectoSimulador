@@ -23,7 +23,7 @@ public class UsuarioController {
     @GetMapping("/registrar")
     public void registrarUsuario(@RequestParam String rut, @RequestParam String password, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String correo) {
 
-        if (usuarioService.usuarioPorId(new Usuario(rut))) {               //Compara el RUT ingresado y lo compara con la DB, si esque esta, arroja un mensaje que dice que esta en uso
+        if (usuarioService.existeUsuarioPorId(rut)) {               //Compara el RUT ingresado y lo compara con la DB, si esque esta, arroja un mensaje que dice que esta en uso
             System.out.println("Rut actualmente en uso");
         }else{                                                             //Si no esta, crea un objeto usuario, cuyo rol se define por el admin
             Usuario usuario = new Usuario(rut, password, nombre, apellido, correo, new Date());
@@ -31,4 +31,19 @@ public class UsuarioController {
             System.out.println("Usuario registrado exitosamente");
         }
     }
+
+    @GetMapping("/login")
+    public boolean login(@RequestParam String rut, @RequestParam String password){
+
+        if((usuarioService.existeUsuarioPorId(rut)) &&  usuarioService.existeContraseña(password)){
+            String nombre = usuarioService.obtenerUsuario(rut).getNombre();
+            System.out.println("Bienvenido "+nombre);
+            return true;
+        }else{
+            System.out.println("Usuario o contraseña incorrectos");
+            return false;
+        }
+    }
+
+
 }

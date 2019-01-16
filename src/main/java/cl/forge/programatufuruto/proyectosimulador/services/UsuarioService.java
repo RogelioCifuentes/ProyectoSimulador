@@ -21,7 +21,17 @@ public class UsuarioService {
         usuarioRepository.save(usuario);
     }
 
-    public boolean usuarioPorId(Usuario usuario){
-        return usuarioRepository.findById(usuario);
+    public boolean existeUsuarioPorId(String rut){
+        return usuarioRepository.existsById(rut);
     }
+
+    public boolean existeContraseña(String password){
+        return usuarioRepository.findByPassword(password);
+    }
+
+    public Usuario obtenerUsuario(String rut){
+        return usuarioRepository.findByRut(rut);     //???? Con esto basta para retornar el objeto entero segun su id??
+    }
+
+
 }
