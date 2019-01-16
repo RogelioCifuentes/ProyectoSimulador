@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -35,8 +36,10 @@ public class UsuarioController {
     @GetMapping("/login")
     public boolean login(@RequestParam String rut, @RequestParam String password){
 
-        if((usuarioService.existeUsuarioPorId(rut)) &&  usuarioService.existeContraseña(password)){
-            String nombre = usuarioService.obtenerUsuario(rut).getNombre();
+        List<Usuario> lista = usuarioService.validador(rut,password);                       //Se hace una consulta a la DB con los datos ingresados y se crea una lista con el resultado
+
+        if(lista.size() != 0){                                                              //Si la lista es distinta de 0, es porque hay alguien con ese RUT y esa PASSWORD en la DB
+            String nombre = usuarioService.obtenerUsuario(rut).getNombre();                 //La consulta obtenerUsuario, me trae un objeto Usuario por su rut, del cual se le extrae el nombre
             System.out.println("Bienvenido "+nombre);
             return true;
         }else{

@@ -6,6 +6,8 @@ import cl.forge.programatufuruto.proyectosimulador.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UsuarioService {
 
@@ -25,8 +27,8 @@ public class UsuarioService {
         return usuarioRepository.existsById(rut);
     }
 
-    public boolean existeContraseña(String password){
-        return usuarioRepository.findByPassword(password);
+    public List<Usuario> validador(String rut, String password){
+        return usuarioRepository.findByRutAndPassword(rut,password);
     }
 
     public Usuario obtenerUsuario(String rut){
