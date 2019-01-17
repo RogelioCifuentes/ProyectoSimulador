@@ -4,10 +4,7 @@ package cl.forge.programatufuruto.proyectosimulador.controller;
 import cl.forge.programatufuruto.proyectosimulador.model.Usuario;
 import cl.forge.programatufuruto.proyectosimulador.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -23,7 +20,8 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    @GetMapping("/registrar")
+    @CrossOrigin()
+    @RequestMapping("/registrar")
     public void registrarUsuario(@RequestParam String rut, @RequestParam String password, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String correo) {
 
         if (usuarioService.existeUsuarioPorId(rut)) {               //Compara el RUT ingresado y lo compara con la DB, si esque esta, arroja un mensaje que dice que esta en uso
@@ -35,8 +33,9 @@ public class UsuarioController {
         }
     }
 
-    @GetMapping("/login")
-    public boolean login(@RequestParam String rut, @RequestParam String password){
+    @CrossOrigin()
+    @RequestMapping("/login")
+    public boolean login(@RequestParam("rut") String rut, @RequestParam("password") String password){
 
         List<Usuario> lista = usuarioService.validador(rut,password);                       //Se hace una consulta a la DB con los datos ingresados y se crea una lista con el resultado
 
