@@ -1,9 +1,12 @@
 package cl.forge.programatufuruto.proyectosimulador.services;
 
 
+import cl.forge.programatufuruto.proyectosimulador.model.Banco;
 import cl.forge.programatufuruto.proyectosimulador.repository.BancoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class BancoService {
@@ -13,6 +16,14 @@ public class BancoService {
     @Autowired
     public BancoService(BancoRepository bancoRepository){
         this.bancoRepository = bancoRepository;
+    }
+
+    public Iterable<Banco> findAll(){
+        return bancoRepository.findAll();
+    }
+
+    public Banco findById(String idBanco){
+        return bancoRepository.findById(idBanco).get();
     }
 
 
