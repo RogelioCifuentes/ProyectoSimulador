@@ -17,4 +17,7 @@ public class CreditoGeneradoController {
     public CreditoGeneradoController(CreditoGeneradoService creditoGeneradoService){
         this.creditoGeneradoService = creditoGeneradoService;
     }
+
+
+
 }
