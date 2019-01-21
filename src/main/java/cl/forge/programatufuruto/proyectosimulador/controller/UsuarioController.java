@@ -1,6 +1,7 @@
 package cl.forge.programatufuruto.proyectosimulador.controller;
 
 
+import cl.forge.programatufuruto.proyectosimulador.model.Rol;
 import cl.forge.programatufuruto.proyectosimulador.model.Usuario;
 import cl.forge.programatufuruto.proyectosimulador.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
+
+    //REGISTRO DE USUARIO NORMAL
     @CrossOrigin(origins="*")
     @PostMapping("/registrar")
     public boolean registrarUsuario(@RequestBody Usuario user) {
@@ -28,13 +31,14 @@ public class UsuarioController {
             System.out.println("Rut actualmente en uso");
             return false;
         }else{                                                             //Si no esta, crea un objeto usuario, cuyo rol se define por el admin
-            Usuario usuario = new Usuario(user.getRut(), user.getPassword(), user.getNombre(), user.getApellido(), user.getCorreo(), new Date());
+            Usuario usuario = new Usuario(user.getRut(), user.getPassword(), user.getNombre(), user.getApellido(), user.getCorreo(), new Date(), new Rol(3,"Usuario Comun", "Usuario"));
             usuarioService.guardarUsuario(usuario);
             System.out.println("Usuario registrado exitosamente");
             return true;
         }
     }
 
+    //LOGIN USUARIO NORMAL Y EJECUTIVO
     @CrossOrigin(origins="*")
     @PostMapping("/login")
     public boolean login(@RequestBody Usuario user){
@@ -48,6 +52,21 @@ public class UsuarioController {
         }else{
             System.out.println("Usuario o contraseña incorrectos");
             return false;
+        }
+    }
+
+    @CrossOrigin(origins="*")
+    @PostMapping("/registrarEjecutivo")
+    public boolean registrarUsuarioEjecutivo(@RequestBody Usuario user) {
+
+        if (usuarioService.existeUsuarioPorId(user.getRut())) {               //Compara el RUT ingresado y lo compara con la DB, si esque esta, arroja un mensaje que dice que esta en uso
+            System.out.println("Rut actualmente en uso");
+            return false;
+        }else{                                                             //Si no esta, crea un objeto usuario, cuyo rol se define por el admin
+            Usuario usuario = new Usuario(user.getRut(), user.getPassword(), user.getNombre(), user.getApellido(), user.getCorreo(), new Date(),new Rol(2,"Ejecutivo","Puede ver tablas especiales"));
+            usuarioService.guardarUsuario(usuario);
+            System.out.println("Usuario registrado exitosamente");
+            return true;
         }
     }
 

@@ -19,18 +19,20 @@ public class UsuarioService {
     }
 
 
+    public List<Usuario> validador(String rut, String password){
+        return usuarioRepository.findByRutAndPassword(rut,password);
+    }
+
 
     public void guardarUsuario(Usuario usuario){
         usuarioRepository.save(usuario);
     }
 
+
     public boolean existeUsuarioPorId(String rut){
         return usuarioRepository.existsById(rut);
     }
 
-    public List<Usuario> validador(String rut, String password){
-        return usuarioRepository.findByRutAndPassword(rut,password);
-    }
 
     public Usuario obtenerUsuario(String rut){
         return usuarioRepository.findByRut(rut);     //???? Con esto basta para retornar el objeto entero segun su id??

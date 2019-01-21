@@ -34,6 +34,7 @@ public class Usuario {
     private Rol rol;
 
 
+
     public Usuario(){
 
     }
@@ -49,6 +50,16 @@ public class Usuario {
         this.apellido = apellido;
         this.correo = correo;
         this.fechaRegistro = fechaRegistro;
+    }
+
+    public Usuario(String rut, String password, String nombre, String apellido, String correo, Date fechaRegistro, Rol rol) {
+        this.rut = rut;
+        this.password = password;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.correo = correo;
+        this.fechaRegistro = fechaRegistro;
+        this.rol = rol;
     }
 
     public String getRut() {
@@ -99,6 +110,14 @@ public class Usuario {
         this.fechaRegistro = fechaRegistro;
     }
 
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
+
     @Override
     public String toString() {
         return "Usuario{" +
@@ -108,6 +127,7 @@ public class Usuario {
                 ", apellido='" + apellido + '\'' +
                 ", correo='" + correo + '\'' +
                 ", fechaRegistro=" + fechaRegistro +
+                ", rol=" + rol +
                 '}';
     }
 }
