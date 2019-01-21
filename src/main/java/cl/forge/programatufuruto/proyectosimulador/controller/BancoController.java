@@ -4,6 +4,7 @@ package cl.forge.programatufuruto.proyectosimulador.controller;
 import cl.forge.programatufuruto.proyectosimulador.model.Banco;
 import cl.forge.programatufuruto.proyectosimulador.services.BancoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,7 @@ public class BancoController {
 
 
     //LISTAR TODOS LOS BANCOS
+    @CrossOrigin(origins="*")
     @RequestMapping("/listar")
     public List<Banco> listarBancos(){
         List<Banco> lista = new ArrayList<>();
@@ -32,8 +34,11 @@ public class BancoController {
     }
 
     //LISTAR POR ID BANCO
+    @CrossOrigin(origins="*")
     @RequestMapping("/id/{id}")
     public Banco buscarPorId(@PathVariable(value="id") String id){
        return bancoService.findById(id);
     }
+
+
 }
