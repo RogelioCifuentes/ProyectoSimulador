@@ -41,17 +41,18 @@ public class UsuarioController {
     //LOGIN USUARIO NORMAL Y EJECUTIVO
     @CrossOrigin(origins="*")
     @PostMapping("/login")
-    public boolean login(@RequestBody Usuario user){
+    public Usuario login(@RequestBody Usuario user){
 
         List<Usuario> lista = usuarioService.validador(user.getRut(), user.getPassword());                       //Se hace una consulta a la DB con los datos ingresados y se crea una lista con el resultado
 
         if(lista.size() != 0){                                                              //Si la lista es distinta de 0, es porque hay alguien con ese RUT y esa PASSWORD en la DB
             String nombre = usuarioService.obtenerUsuario(user.getRut()).getNombre();                 //La consulta obtenerUsuario, me trae un objeto Usuario por su rut, del cual se le extrae el nombre
             System.out.println("Bienvenido "+nombre);
-            return true;
+
+            return usuarioService.obtenerUsuario(user.getRut());
         }else{
             System.out.println("Usuario o contraseña incorrectos");
-            return false;
+            return null;
         }
     }
 

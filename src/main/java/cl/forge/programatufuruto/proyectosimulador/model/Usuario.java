@@ -11,7 +11,6 @@ public class Usuario {
     @Column(name = "rut")
     private String rut;
 
-
     @Column(name = "password")
     private String password;
 

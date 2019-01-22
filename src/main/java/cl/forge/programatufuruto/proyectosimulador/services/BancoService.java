@@ -18,6 +18,9 @@ public class BancoService {
         this.bancoRepository = bancoRepository;
     }
 
+    public void guardarBanco(Banco banco){
+        bancoRepository.save(banco);
+    }
     public Iterable<Banco> findAll(){
         return bancoRepository.findAll();
     }

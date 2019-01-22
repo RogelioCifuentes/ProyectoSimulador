@@ -37,9 +37,13 @@ public class BancoController {
     public boolean setCaeYTasaInteres(@RequestBody Banco banco ){
 
         if(banco.getCae()!=0 && banco.getTasaInteresMensual()!=0 && banco.getGastosAsociados()!=0){
-            bancoService.findById(banco.getIdNombre()).setCae(banco.getCae());
-            bancoService.findById(banco.getIdNombre()).setTasaInteresMensual(banco.getTasaInteresMensual());
-            bancoService.findById(banco.getIdNombre()).setGastosAsociados(banco.getGastosAsociados());
+
+            Banco banquito = bancoService.findById(banco.getIdNombre());
+                    banquito.setCae(banco.getCae());
+                    banquito.setGastosAsociados(banco.getGastosAsociados());
+                            banquito.setTasaInteresMensual(banco.getTasaInteresMensual());
+                    bancoService.guardarBanco(banquito);
+
 
             System.out.println("Datos actualizados exitosamente"+banco.getGastosAsociados()+" -"+banco.getTasaInteresMensual()+" - "+banco.getCae());
             return true;
