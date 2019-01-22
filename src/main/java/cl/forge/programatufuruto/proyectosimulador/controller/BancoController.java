@@ -31,11 +31,34 @@ public class BancoController {
     }
 
 
-    //LISTAR POR ID BANCO
+    //Setear cae y tasaInteres
     @CrossOrigin(origins="*")
-    @RequestMapping("/id/{id}")
-    public Banco buscarPorId(@PathVariable(value="id") String id){
-       return bancoService.findById(id);
+    @PutMapping("/setear")
+    public boolean setCaeYTasaInteres(@RequestBody Banco banco ){
+
+        if(banco.getCae()!=0 && banco.getTasaInteresMensual()!=0 && banco.getGastosAsociados()!=0){
+            bancoService.findById(banco.getIdNombre()).setCae(banco.getCae());
+            bancoService.findById(banco.getIdNombre()).setTasaInteresMensual(banco.getTasaInteresMensual());
+            bancoService.findById(banco.getIdNombre()).setGastosAsociados(banco.getGastosAsociados());
+
+            System.out.println("Datos actualizados exitosamente"+banco.getGastosAsociados()+" -"+banco.getTasaInteresMensual()+" - "+banco.getCae());
+            return true;
+        }else if(banco.getCae()!=0 && banco.getTasaInteresMensual()==0 && banco.getGastosAsociados()==0){
+            bancoService.findById(banco.getIdNombre()).setCae(banco.getCae());
+            return true;
+        }else if(banco.getCae() == 0 && banco.getTasaInteresMensual()!=0 && banco.getGastosAsociados()==0){
+            bancoService.findById(banco.getIdNombre()).setTasaInteresMensual(banco.getTasaInteresMensual());
+            return true;
+        }else {
+
+            if (banco.getGastosAsociados() != 0) {
+                bancoService.findById(banco.getIdNombre()).setGastosAsociados(banco.getGastosAsociados());
+                return true;
+            }else{
+                System.out.println("Ingrese bien los datos");
+            }
+        }
+        return false;
     }
 
 
