@@ -35,8 +35,10 @@ public class UsuarioService {
 
 
     public Usuario obtenerUsuario(String rut){
-        return usuarioRepository.findByRut(rut);     //???? Con esto basta para retornar el objeto entero segun su id??
+        return usuarioRepository.findById(rut).get();
     }
+
+
 
 
 }

@@ -46,10 +46,11 @@ public class UsuarioController {
         List<Usuario> lista = usuarioService.validador(user.getRut(), user.getPassword());                       //Se hace una consulta a la DB con los datos ingresados y se crea una lista con el resultado
 
         if(lista.size() != 0){                                                              //Si la lista es distinta de 0, es porque hay alguien con ese RUT y esa PASSWORD en la DB
-            String nombre = usuarioService.obtenerUsuario(user.getRut()).getNombre();                 //La consulta obtenerUsuario, me trae un objeto Usuario por su rut, del cual se le extrae el nombre
-            System.out.println("Bienvenido "+nombre);
+            Usuario userr = usuarioService.obtenerUsuario(user.getRut());                //La consulta obtenerUsuario, me trae un objeto Usuario por su rut, del cual se le extrae el nombre
+            System.out.println("Bienvenido "+userr.getNombre());
+            Usuario usernameRol = new Usuario(userr.getNombre(),userr.getRol());
 
-            return usuarioService.obtenerUsuario(user.getRut());
+            return usernameRol;
         }else{
             System.out.println("Usuario o contraseña incorrectos");
             return null;
@@ -69,6 +70,21 @@ public class UsuarioController {
             System.out.println("Usuario registrado exitosamente");
             return true;
         }
+    }
+
+    @CrossOrigin(origins="*")
+    @PutMapping("/setear")
+    public boolean setearAtributosUser(@RequestBody Usuario usuario){
+    if(usuarioService.validador(usuario.getRut(),usuario.getPassword())!=null) {
+        Usuario usersito = usuarioService.obtenerUsuario(usuario.getRut());
+        usersito.setCorreo(usuario.getCorreo());
+        //ENVIO LA NUEVA CLAVE EN EL ATRIBUTO NOMBRE
+        usersito.setPassword(usuario.getNombre());
+        usuarioService.guardarUsuario(usersito);
+        return true;
+    }
+
+    return false;
     }
 
 

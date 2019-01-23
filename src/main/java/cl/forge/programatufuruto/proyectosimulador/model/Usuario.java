@@ -42,6 +42,12 @@ public class Usuario {
         this.rut = rut;
     }
 
+    public Usuario(String nombre, Rol rol){
+        this.nombre = nombre;
+        this.rol = rol;
+        this.password = "pa k kieres s4v3r 3s0";
+    }
+
     public Usuario(String rut, String password, String nombre, String apellido, String correo, Date fechaRegistro) {
         this.rut = rut;
         this.password = password;

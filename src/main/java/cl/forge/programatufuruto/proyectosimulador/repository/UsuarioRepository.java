@@ -12,10 +12,9 @@ public interface UsuarioRepository extends CrudRepository<Usuario, String> {
 
 
 
+
     List<Usuario> findByRutAndPassword(String rut, String password);
 
-
-    Usuario findByRut(String rut);
 
 
 
