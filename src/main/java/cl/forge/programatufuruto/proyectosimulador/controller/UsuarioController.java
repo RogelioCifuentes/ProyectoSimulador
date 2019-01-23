@@ -57,7 +57,7 @@ public class UsuarioController {
     }
 
     @CrossOrigin(origins="*")
-    @PostMapping("/registrarEjecutivo")
+    @PutMapping("/registrarEjecutivo")
     public boolean registrarUsuarioEjecutivo(@RequestBody Usuario user) {
 
         if (usuarioService.existeUsuarioPorId(user.getRut())) {               //Compara el RUT ingresado y lo compara con la DB, si esque esta, arroja un mensaje que dice que esta en uso
