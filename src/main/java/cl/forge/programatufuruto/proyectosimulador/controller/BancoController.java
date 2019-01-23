@@ -34,8 +34,25 @@ public class BancoController {
     //Setear cae y tasaInteres
     @CrossOrigin(origins="*")
     @PutMapping("/setear")
-    public boolean setCaeYTasaInteres(@RequestBody Banco banco ){
+    public boolean setCaeYTasaInteres(@RequestBody Banco banco ) {
 
+        Banco banquito = bancoService.findById(banco.getIdNombre());
+
+        if(banco.getCae() != null)
+            banquito.setCae(banco.getCae());
+
+        if(banco.getTasaInteresMensual() != null)
+            banquito.setTasaInteresMensual(banco.getTasaInteresMensual());
+
+        if(banco.getGastosAsociados() != null)
+            banquito.setGastosAsociados(banco.getGastosAsociados());
+
+        bancoService.guardarBanco(banquito);
+        return true;
+
+    }
+
+        /*
         if(banco.getCae()!=0 && banco.getTasaInteresMensual()!=0 && banco.getGastosAsociados()!=0){
 
             Banco banquito = bancoService.findById(banco.getIdNombre());
@@ -74,5 +91,5 @@ public class BancoController {
         return false;
     }
 
-
+*/
 }
