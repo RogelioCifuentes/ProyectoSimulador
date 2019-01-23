@@ -30,6 +30,14 @@ public class BancoController {
         return lista;
     }
 
+    //Traer Banco por ID
+    @CrossOrigin(origins="*")
+    @PutMapping("/banco")
+    public Banco traerBanco(@RequestBody Banco banco){
+        return bancoService.findById(banco.getIdNombre());
+    }
+
+
 
     //Setear cae y tasaInteres
     @CrossOrigin(origins="*")
