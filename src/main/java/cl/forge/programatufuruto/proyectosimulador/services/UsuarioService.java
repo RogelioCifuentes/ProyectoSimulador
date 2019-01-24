@@ -28,6 +28,9 @@ public class UsuarioService {
 
     }
     public List<Usuario> validador(String rut, String password){return usuarioRepository.findByRutAndPassword(rut,password); }
+    public Usuario validador2(String correo, String password){
+        return usuarioRepository.findByCorreoAndPassword(correo, password);
+    }
 
     public void guardarUsuario(Usuario usuario){
         usuarioRepository.save(usuario);

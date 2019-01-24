@@ -16,6 +16,7 @@ public interface UsuarioRepository extends CrudRepository<Usuario, String> {
 
     List<Usuario> findByRol(Rol rol);
     List<Usuario> findByRutAndPassword(String rut, String password);
+    Usuario findByCorreoAndPassword(String correo, String password);
 
 
 

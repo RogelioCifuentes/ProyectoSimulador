@@ -44,6 +44,12 @@ public class UsuarioController {
     @PostMapping("/login")
     public Usuario login(@RequestBody Usuario user){
 
+        //INGRESAR CON CORREO Y PASSWORD
+        if(user.getRut().contains("@")) {
+            Usuario userr = usuarioService.validador2(user.getRut(), user.getPassword());
+            return new Usuario(userr.getNombre(),userr.getRol());   //Retorna el nombre y Rol de un usuario que hace login por correo y pass.
+        }
+        //INGRESAR CON RUT Y PASSWORD
         List<Usuario> lista = usuarioService.validador(user.getRut(), user.getPassword());                       //Se hace una consulta a la DB con los datos ingresados y se crea una lista con el resultado
 
         if(lista.size() != 0){                                                              //Si la lista es distinta de 0, es porque hay alguien con ese RUT y esa PASSWORD en la DB
@@ -79,6 +85,8 @@ public class UsuarioController {
     public List<Usuario> traerEjecutivos(){
         return usuarioService.traerEjecutivos();
     }
+
+
     @CrossOrigin(origins="*")
     @PutMapping("/setear")
     public boolean setearAtributosUser(@RequestBody Usuario usuario){
