@@ -7,6 +7,7 @@ import cl.forge.programatufuruto.proyectosimulador.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -72,14 +73,23 @@ public class UsuarioController {
         }
     }
 
+
+    @CrossOrigin(origins="*")
+    @GetMapping("/ejecutivos")
+    public List<Usuario> traerEjecutivos(){
+        return usuarioService.traerEjecutivos();
+    }
     @CrossOrigin(origins="*")
     @PutMapping("/setear")
     public boolean setearAtributosUser(@RequestBody Usuario usuario){
     if(usuarioService.validador(usuario.getRut(),usuario.getPassword())!=null) {
         Usuario usersito = usuarioService.obtenerUsuario(usuario.getRut());
+        if(usuario.getCorreo()!=null)
         usersito.setCorreo(usuario.getCorreo());
         //ENVIO LA NUEVA CLAVE EN EL ATRIBUTO NOMBRE
+        if(usuario.getNombre()!=null)
         usersito.setPassword(usuario.getNombre());
+
         usuarioService.guardarUsuario(usersito);
         return true;
     }

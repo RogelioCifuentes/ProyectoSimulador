@@ -24,6 +24,9 @@ public class Rol {
 
     }
 
+    public Rol(Integer idRol){
+        this.idRol = idRol;
+    }
     public Rol(Integer idRol, String nombre, String descripcion) {
         this.idRol = idRol;
         this.nombre = nombre;
