@@ -32,6 +32,9 @@ public class Usuario {
     @JoinColumn(name ="idRol")
     private Rol rol;
 
+    @Column(name = "activo")
+    private Integer activo;
+
 
 
     public Usuario(){
@@ -42,10 +45,11 @@ public class Usuario {
         this.rut = rut;
     }
 
-    public Usuario(String nombre, Rol rol){
+    public Usuario(String nombre, Rol rol, Integer activo){
         this.nombre = nombre;
         this.rol = rol;
         this.password = "pa k kieres s4v3r 3s0";
+        this.activo = activo;
     }
 
     public Usuario(String rut, String password, String nombre, String apellido, String correo, Date fechaRegistro) {
@@ -55,6 +59,7 @@ public class Usuario {
         this.apellido = apellido;
         this.correo = correo;
         this.fechaRegistro = fechaRegistro;
+        this.activo = 1;
     }
 
     public Usuario(String rut, String password, String nombre, String apellido, String correo, Date fechaRegistro, Rol rol) {
@@ -65,6 +70,7 @@ public class Usuario {
         this.correo = correo;
         this.fechaRegistro = fechaRegistro;
         this.rol = rol;
+        this.activo = 1;
     }
 
     public String getRut() {
@@ -123,6 +129,14 @@ public class Usuario {
         this.rol = rol;
     }
 
+    public int getActivo() {
+        return activo;
+    }
+
+    public void setActivo(int activo) {
+        this.activo = activo;
+    }
+
     @Override
     public String toString() {
         return "Usuario{" +
@@ -133,6 +147,7 @@ public class Usuario {
                 ", correo='" + correo + '\'' +
                 ", fechaRegistro=" + fechaRegistro +
                 ", rol=" + rol +
+                ", activo=" + activo +
                 '}';
     }
 }
