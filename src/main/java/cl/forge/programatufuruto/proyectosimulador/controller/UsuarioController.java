@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
@@ -24,7 +24,7 @@ public class UsuarioController {
 
 
     //REGISTRO DE USUARIO NORMAL
-    @CrossOrigin(origins="*")
+
     @PostMapping("/registrar")
     public boolean registrarUsuario(@RequestBody Usuario user) {
 
@@ -42,14 +42,13 @@ public class UsuarioController {
     }
 
     //LOGIN USUARIO NORMAL Y EJECUTIVO
-    @CrossOrigin(origins="*")
     @PostMapping("/login")
     public Usuario login(@RequestBody Usuario user){
 
         //INGRESAR CON CORREO Y PASSWORD
         if(user.getRut().contains("@")) {
             Usuario userr = usuarioService.validador2(user.getRut(), user.getPassword());
-            Usuario usernameRolActivo = new Usuario(userr.getNombre(),userr.getRol(),userr.getActivo());   //Retorna el nombre y Rol de un usuario que hace login por correo y pass.
+            Usuario usernameRolActivo = new Usuario(userr.getNombre(),userr.getRol(),userr.getActivo(),user.getRut());   //Retorna el nombre y Rol de un usuario que hace login por correo y pass.
             return usernameRolActivo;
         }
         //INGRESAR CON RUT Y PASSWORD
@@ -58,7 +57,7 @@ public class UsuarioController {
         if(lista.size() != 0){                                                              //Si la lista es distinta de 0, es porque hay alguien con ese RUT y esa PASSWORD en la DB
             Usuario userr = usuarioService.obtenerUsuario(user.getRut());                //La consulta obtenerUsuario, me trae un objeto Usuario por su rut, del cual se le extrae el nombre
             System.out.println("Bienvenido "+userr.getNombre());
-            Usuario usernameRol = new Usuario(userr.getNombre(),userr.getRol(),userr.getActivo());
+            Usuario usernameRol = new Usuario(userr.getNombre(),userr.getRol(),userr.getActivo(),user.getRut());
 
             return usernameRol;
         }else{
@@ -67,7 +66,7 @@ public class UsuarioController {
         }
     }
 
-    @CrossOrigin(origins="*")
+
     @PutMapping("/registrarEjecutivo")
     public boolean registrarUsuarioEjecutivo(@RequestBody Usuario user) {
 
@@ -83,7 +82,7 @@ public class UsuarioController {
     }
 
 
-    @CrossOrigin(origins="*")
+
     @GetMapping("/ejecutivos")
     public List<Usuario> traerEjecutivos(){
         return usuarioService.traerEjecutivos();
@@ -110,7 +109,7 @@ public class UsuarioController {
         return false;
 
     }
-    @CrossOrigin(origins="*")
+
     @PutMapping("/banear")
     public boolean eliminarUsuario(@RequestBody Usuario usuario){
         Usuario usuariosito = usuarioService.obtenerUsuario(usuario.getRut());
@@ -118,5 +117,8 @@ public class UsuarioController {
         usuarioService.guardarUsuario(usuariosito);
         return true;
     }
+
+
+
 
 }

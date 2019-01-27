@@ -25,6 +25,9 @@ public class CreditoGeneradoService {
         return creditoGeneradoRepository.findById(idCreditoGenerado).get();
     }
 
+    public void guardarCredito(CreditoGenerado creditoGenerado){
+       creditoGeneradoRepository.save(creditoGenerado);
+    }
 
     public long numeroDeCreditosGenerados(){
        return creditoGeneradoRepository.count();

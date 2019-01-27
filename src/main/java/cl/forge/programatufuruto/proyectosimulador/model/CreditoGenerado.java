@@ -43,7 +43,7 @@ public class CreditoGenerado {
     private Banco banco;
 
     @ManyToOne
-    @JoinColumn(name = "idUsuario")
+    @JoinColumn(name = "rut")
     private Usuario usuario;
 
     public CreditoGenerado(){
