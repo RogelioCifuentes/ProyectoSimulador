@@ -69,8 +69,5 @@ public class BancoController {
 
         bancoService.guardarBanco(banquito);
         return true;
-
     }
-
-
 }

@@ -8,6 +8,9 @@ import cl.forge.programatufuruto.proyectosimulador.services.CreditoGeneradoServi
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/creditosGenerados")
@@ -23,11 +26,14 @@ public class CreditoGeneradoController {
 
     @PostMapping("/guardar")
     public void guardarCredito(@RequestBody CreditoGenerado creditoGenerado){
-
         creditoGeneradoService.guardarCredito(creditoGenerado);
-
     }
 
-
+    @PutMapping("/traerCreditos")
+    public List<CreditoGenerado> traerCreditos(@RequestBody Usuario idUsuario){
+        List<CreditoGenerado> lista = new ArrayList<>();
+        creditoGeneradoService.traerCreditosPersonales(idUsuario).forEach(CreditoGenerado -> lista.add(CreditoGenerado));
+        return lista;
+    }
 
 }

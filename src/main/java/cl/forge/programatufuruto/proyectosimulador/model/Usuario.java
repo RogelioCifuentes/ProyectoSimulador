@@ -41,7 +41,9 @@ public class Usuario {
 
     }
 
-
+    public Usuario(String idUsuario){
+        this.rut = idUsuario;
+    }
 
     public Usuario(String nombre, Rol rol, Integer activo, String rut){
         this.nombre = nombre;

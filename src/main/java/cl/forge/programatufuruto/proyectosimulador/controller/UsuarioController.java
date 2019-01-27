@@ -101,13 +101,10 @@ public class UsuarioController {
 
         if (usuario.getNombre() != null)
             usersito.setPassword(usuario.getNombre());
-
             usuarioService.guardarUsuario(usersito);
             return true;
         }
-
         return false;
-
     }
 
     @PutMapping("/banear")
