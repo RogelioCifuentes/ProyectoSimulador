@@ -29,14 +29,12 @@ public class UsuarioController {
     public boolean registrarUsuario(@RequestBody Usuario user) {
 
         if (usuarioService.existeUsuarioPorId(user.getRut())) {               //Compara el RUT ingresado y lo compara con la DB, si esque esta, arroja un mensaje que dice que esta en uso
-            System.out.println("Rut actualmente en uso");
             return false;
         }else if(usuarioService.obtenerUsuarioPorCorreo(user.getCorreo())!=null){
             return false;
         }else{                                                             //Si no esta, crea un objeto usuario, cuyo rol se define por el admin
             Usuario usuario = new Usuario(user.getRut(), user.getPassword(), user.getNombre(), user.getApellido(), user.getCorreo(), new Date(), new Rol(3,"Usuario Comun", "Usuario"));
             usuarioService.guardarUsuario(usuario);
-            System.out.println("Usuario registrado exitosamente");
             return true;
         }
     }

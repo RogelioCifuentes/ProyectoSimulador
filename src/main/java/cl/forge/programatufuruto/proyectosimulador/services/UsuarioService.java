@@ -5,7 +5,9 @@ import cl.forge.programatufuruto.proyectosimulador.model.Rol;
 import cl.forge.programatufuruto.proyectosimulador.model.Usuario;
 import cl.forge.programatufuruto.proyectosimulador.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -21,6 +23,10 @@ public class UsuarioService {
         this.usuarioRepository=usuarioRepository;
     }
 
+
+  /*  @Autowired
+    private BCryptPasswordEncoder encoder;
+*/
     public List<Usuario> traerEjecutivos(){
 
         List<Usuario> ejecutivos = new ArrayList<>();
@@ -30,12 +36,13 @@ public class UsuarioService {
 
 
     public List<Usuario> validador(String rut, String password){return usuarioRepository.findByRutAndPassword(rut,password); }
+
     public Usuario validador2(String correo, String password){
         return usuarioRepository.findByCorreoAndPassword(correo, password);
     }
 
-
     public void guardarUsuario(Usuario usuario){
+        usuario.setPassword(usuario.getPassword());
         usuarioRepository.save(usuario);
     }
 

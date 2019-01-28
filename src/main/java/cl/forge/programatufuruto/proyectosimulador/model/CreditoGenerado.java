@@ -59,7 +59,7 @@ public class CreditoGenerado {
         this.idCreditoGenerado = id;
     }
 
-    
+
     public CreditoGenerado(Integer idCreditoGenerado, String nombre, Integer valorCuota, Float cae, Float tasaInteresMensual, Integer gastosAsociados, Integer seguro, Integer totalIntereses, Integer montoBrutoCredito, Integer costoTotal, Date fechaCredito, Banco banco, Usuario usuario) {
         this.idCreditoGenerado = idCreditoGenerado;
         this.nombre = nombre;
