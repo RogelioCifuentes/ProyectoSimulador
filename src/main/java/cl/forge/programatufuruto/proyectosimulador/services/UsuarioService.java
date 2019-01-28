@@ -5,11 +5,8 @@ import cl.forge.programatufuruto.proyectosimulador.model.Rol;
 import cl.forge.programatufuruto.proyectosimulador.model.Usuario;
 import cl.forge.programatufuruto.proyectosimulador.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,9 +21,7 @@ public class UsuarioService {
     }
 
 
-  /*  @Autowired
-    private BCryptPasswordEncoder encoder;
-*/
+
     public List<Usuario> traerEjecutivos(){
 
         List<Usuario> ejecutivos = new ArrayList<>();
