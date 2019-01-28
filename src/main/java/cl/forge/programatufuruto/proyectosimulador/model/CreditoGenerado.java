@@ -1,6 +1,7 @@
 package cl.forge.programatufuruto.proyectosimulador.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name ="creditoGenerado")
@@ -38,12 +39,16 @@ public class CreditoGenerado {
     @Column(name = "costoTotal")
     private Integer costoTotal;
 
+    @Column(name = "fechaCredito")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaCredito = new Date();
+
     @ManyToOne
     @JoinColumn(name = "idBanco")
     private Banco banco;
 
     @ManyToOne
-    @JoinColumn(name = "idUsuario")
+    @JoinColumn(name = "rut")
     private Usuario usuario;
 
     public CreditoGenerado(){
@@ -54,6 +59,23 @@ public class CreditoGenerado {
         this.idCreditoGenerado = id;
     }
 
+
+    public CreditoGenerado(Integer idCreditoGenerado, String nombre, Integer valorCuota, Float cae, Float tasaInteresMensual, Integer gastosAsociados, Integer seguro, Integer totalIntereses, Integer montoBrutoCredito, Integer costoTotal, Date fechaCredito, Banco banco, Usuario usuario) {
+        this.idCreditoGenerado = idCreditoGenerado;
+        this.nombre = nombre;
+        this.valorCuota = valorCuota;
+        this.cae = cae;
+        this.tasaInteresMensual = tasaInteresMensual;
+        this.gastosAsociados = gastosAsociados;
+        this.seguro = seguro;
+        this.totalIntereses = totalIntereses;
+        this.montoBrutoCredito = montoBrutoCredito;
+        this.costoTotal = costoTotal;
+        this.fechaCredito = fechaCredito;
+        this.banco = banco;
+        this.usuario = usuario;
+    }
+/*
     public CreditoGenerado(String nombre, Integer valorCuota, Float cae, Float tasaInteresMensual, Integer gastosAsociados, Integer seguro, Integer totalIntereses, Integer montoBrutoCredito, Integer costoTotal, Banco banco, Usuario usuario) {
         this.nombre = nombre;
         this.valorCuota = valorCuota;
@@ -67,7 +89,7 @@ public class CreditoGenerado {
         this.banco = banco;
         this.usuario = usuario;
     }
-
+*/
     public Integer getIdCreditoGenerado() {
         return idCreditoGenerado;
     }
@@ -164,6 +186,14 @@ public class CreditoGenerado {
         this.usuario = usuario;
     }
 
+    public Date getFechaCredito() {
+        return fechaCredito;
+    }
+
+    public void setFechaCredito(Date fechaCredito) {
+        this.fechaCredito = fechaCredito;
+    }
+
     @Override
     public String toString() {
         return "CreditoGenerado{" +
@@ -177,8 +207,10 @@ public class CreditoGenerado {
                 ", totalIntereses=" + totalIntereses +
                 ", montoBrutoCredito=" + montoBrutoCredito +
                 ", costoTotal=" + costoTotal +
+                ", fechaCredito=" + fechaCredito +
                 ", banco=" + banco +
                 ", usuario=" + usuario +
                 '}';
     }
+
 }
